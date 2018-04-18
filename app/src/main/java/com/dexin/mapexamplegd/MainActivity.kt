@@ -2,7 +2,6 @@ package com.dexin.mapexamplegd
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import com.amap.api.location.AMapLocation
 import com.amap.api.location.AMapLocationListener
 import com.amap.api.location.AMapLocationClient
@@ -19,8 +18,7 @@ class MainActivity : AppCompatActivity(), AMapLocationListener {
     override fun onLocationChanged(location: AMapLocation?) {
         if (location != null) {
             val code = location.errorCode
-            Log.e("main", "$code")
-            Log.e("main", location.address)
+            mMainTv.text = location.address
         }
     }
 
@@ -63,43 +61,4 @@ class MainActivity : AppCompatActivity(), AMapLocationListener {
         mOption.isLocationCacheEnable = true //可选，设置是否使用缓存定位，默认为true
         return mOption
     }
-
-//    private fun initLocation() {
-//        //声明AMapLocationClient类对象
-//        var mLocationClient: AMapLocationClient? = null
-//
-//        //初始化定位
-//        mLocationClient = AMapLocationClient(applicationContext)
-//        //设置定位回调监听
-//        mLocationClient.setLocationListener(this)
-//
-//        //声明AMapLocationClientOption对象
-//        var mLocationOption: AMapLocationClientOption? = null
-//        //初始化AMapLocationClientOption对象
-//        mLocationOption = AMapLocationClientOption()
-//
-//        val option = AMapLocationClientOption()
-//        /**
-//         * 设置定位场景，目前支持三种场景（签到、出行、运动，默认无场景）
-//         */
-//        option.locationPurpose = AMapLocationClientOption.AMapLocationPurpose.SignIn
-//        if (null != locationClient) {
-//            locationClient.setLocationOption(option)
-//            //设置场景模式后最好调用一次stop，再调用start以保证场景模式生效
-//            locationClient.stopLocation()
-//            locationClient.startLocation()
-//        }
-//
-//        //设置定位模式为AMapLocationMode.Hight_Accuracy，高精度模式。
-//        mLocationOption.setLocationMode(AMapLocationClientOption.AMapLocationMode.Hight_Accuracy);
-//
-//        //设置是否返回地址信息（默认返回地址信息）
-//        mLocationOption.setNeedAddress(true);
-//
-//        //给定位客户端对象设置定位参数
-//        mLocationClient.setLocationOption(mLocationOption);
-//        //启动定位
-//        mLocationClient.startLocation();
-//    }
-
 }
